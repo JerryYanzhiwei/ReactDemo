@@ -122,7 +122,7 @@ module.exports = function(webpackEnv) {
           options: {
             sourceMap: isEnvProduction && shouldUseSourceMap,
             modifyVars: {
-              '@primary-color': '#65917c',
+              '@primary-color': '#f9c700',
             },
             javascriptEnabled: true,
           }
