@@ -4,6 +4,7 @@ import { Row, Col } from 'antd'
 import Header from './components/header'
 import Footer from './components/footer'
 import NavLeft from './components/navLeft'
+import RouterMap from './components/route'
 
 import './style/common.less'
 
@@ -19,7 +20,7 @@ export default class Admin extends React.Component {
           <Col span={20} className="main">
             <Header/>
             <Row className="content">
-              content
+              <RouterMap></RouterMap>
               {/* {this.props.children} */}
             </Row>
             <Footer/>
