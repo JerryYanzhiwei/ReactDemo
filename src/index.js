@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 // import Life from './demo/Lift'
-import {BrowserRouter} from 'react-router-dom'
-import Admin from './admin'
+// import Admin from './admin'
+// import Home from './page/route-dom/route1/home'
+import Router from './page/route-dom/route2/router'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Admin />
-  </BrowserRouter>
-
+    <Router />
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
