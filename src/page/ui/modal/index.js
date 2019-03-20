@@ -19,14 +19,16 @@ export default class Model extends React.Component {
   }
 
   handleShowConfirm = (type) => {
-    let _this = this
-    Modal.confirm({
+    // let _this = this
+    // 此方式写type 等同于 Modal.comfirm
+    Modal[type]({
       title: '确认',
       content: '确认删除吗',
       onOk () {
-        _this.setState({
-          showModal1: true
-        })
+        // _this.setState({
+        //   showModal1: true
+        // })
+        console.log('ok')
       }
     })
   }
@@ -76,10 +78,10 @@ export default class Model extends React.Component {
           <Button type="primary" onClick={() => this.handleShowModal('showModal3')}>顶部20px弹框</Button>
         </Card> 
         <Card className='card_wrap' title="信息确认框" style={{textAlign: 'left'}}>
-          <Button type="primary" onClick={() => this.handleShowConfirm('showModal1')}>Confirm</Button>
-          <Button type="primary" onClick={() => this.handleShowConfirm('showModal2')}>Info</Button>
-          <Button type="primary" onClick={() => this.handleShowConfirm('showModal3')}>Success</Button>
-          <Button type="primary" onClick={() => this.handleShowConfirm('showModal3')}>Wraning</Button>
+          <Button type="primary" onClick={() => this.handleShowConfirm('confirm')}>Confirm</Button>
+          <Button type="primary" onClick={() => this.handleShowConfirm('info')}>Info</Button>
+          <Button type="primary" onClick={() => this.handleShowConfirm('success')}>Success</Button>
+          <Button type="primary" onClick={() => this.handleShowConfirm('warning')}>Wraning</Button>
         </Card> 
       </div>
     )
