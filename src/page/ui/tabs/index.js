@@ -30,6 +30,11 @@ export default class Tab extends React.Component {
   callback = (key) => {
     message.info('您点击了' + key)
   }
+  onChange = (activeKey) => {
+    this.setState({
+      activeKey
+    })
+  }
   render () {
     return (
       <div>
@@ -55,7 +60,7 @@ export default class Tab extends React.Component {
           </Tabs>
         </Card>
         <Card title="可添加删除的页签">
-          <Tabs type="editable-card">
+          <Tabs type="editable-card" onChange={this.onChange} activeKey={this.state.activeKey}>
             {
               this.state.panes.map((item) => {
                 return <TabPane
