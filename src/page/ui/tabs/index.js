@@ -5,33 +5,74 @@ import { Card, Tabs, message, Icon } from 'antd'
 const TabPane = Tabs.TabPane
 
 export default class Tab extends React.Component {
-  componentWillMount () {
+  constructor (props) {
+    super()
+    this.newIndex = 0
     const panes = [
       {
         title: 'tab1',
         content: 'tab1',
-        key: 1
+        key: '1'
       },
       {
         title: 'tab2',
         content: 'tab2',
-        key: 2
+        key: '2'
       },
       {
         title: 'tab3',
         content: 'tab3',
-        key: 3
+        key: '3'
       }
     ]
-    this.setState({
-      panes
-    })
+    this.state = {
+      activeKey: panes[0].key,
+      panes,
+      newIndex: 0
+    }
   }
   callback = (key) => {
     message.info('您点击了' + key)
   }
   onChange = (activeKey) => {
     this.setState({
+      activeKey
+    })
+  }
+  
+  edit = (targetKey, action) => {
+    this[action](targetKey)
+  }
+
+  remove = (targetKey) => {
+    let activeKey = this.state.activeKey
+    let lastIndex
+    this.state.panes.forEach((pane, i) => {
+      if (pane.key === targetKey) {
+        lastIndex = i - 1
+      }
+    })
+    const panes = this.state.panes.filter((pane) => pane.key !== targetKey)
+    console.log(targetKey, activeKey)
+    if (panes.length && targetKey === activeKey) {
+      if (lastIndex >= 0) {
+        activeKey = panes[lastIndex].key
+      } else {
+        activeKey = panes[0].key
+      }
+    }
+    this.setState({
+      activeKey,
+      panes
+    })
+  }
+
+  add = () => {
+    const panes = this.state.panes
+    const activeKey = `newTab${this.newIndex++}`
+    panes.push({title: `newTab${this.newIndex}`, content: `newTab${this.newIndex}`, key: activeKey})
+    this.setState({
+      panes,
       activeKey
     })
   }
@@ -60,17 +101,23 @@ export default class Tab extends React.Component {
           </Tabs>
         </Card>
         <Card title="可添加删除的页签">
-          <Tabs type="editable-card" onChange={this.onChange} activeKey={this.state.activeKey}>
+          <Tabs
+            onChange={this.onChange}
+            type="editable-card"
+            activeKey={this.state.activeKey}
+            onEdit={this.edit}
+          >
             {
-              this.state.panes.map((item) => {
+              this.state.panes.map((items) => {
                 return <TabPane
-                  tab={item.title}
-                  key={item.key}
+                  key={items.key}
+                  tab={items.title}
                 >
-                  {item.content}
+                  {items.content}
                 </TabPane>
               })
             }
+
           </Tabs>
         </Card>
       </div>
